@@ -6,6 +6,7 @@ import Signup from './pages/Signup';
 import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
+import Sidebar from "./components/layout/Sidebar";
 
 const App = () => {
     return (
