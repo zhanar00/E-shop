@@ -6,7 +6,7 @@ module.exports = {
       colors: {
         greenPrimary: '#6cc56c', // Your primary green color
         darkGray: '#333',
-      },
+      },  
     },
   },
   plugins: [],
