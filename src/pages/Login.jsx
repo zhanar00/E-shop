@@ -1,15 +1,31 @@
 import React, { useState } from "react";
+import {mockUsers} from "../data/mockUsers";
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {login} from "../redux/authSlice";
 
 const LoginPage = () => {
     const [contact, setContact] = useState("");
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [error, setError] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Contact:", contact);
         console.log("Password:", password);
         console.log("Remember Me:", rememberMe);
+        const user = mockUsers.find(
+            (u) => u.email === contact && u.password === password
+        );
+        if (user) {
+            dispatch(login(user)); // Dispatch Redux login action
+            navigate("/profile");
+        } else {
+            setError("Invalid credentials");
+        }
     };
 
     return (
@@ -70,6 +86,7 @@ const LoginPage = () => {
                         <span className="text-sm text-gray-600">
                         You don’t have an account yet? <a href="/signup" className="text-green-500 hover:underline">Register</a>
                         </span>
+                        {error && <p>{error}</p>}
                         {/* Submit Button */}
                         <button type="submit"
                                 className=" bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-11 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
