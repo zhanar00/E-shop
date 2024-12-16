@@ -1,28 +1,41 @@
-import './App.css';
-import React from 'react';
-import Header from '../src/components/layout/Header';
-import HeroBanner from '../src/components/HeroBanner';
-import ProductList from '../src/components/product/ProductList';
-import Footer from '../src/components/layout/Footer';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home"; // Default page for customers when opening the site
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import ProductDetails from "./pages/ProductDetails";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
-const mockProducts = [
-    { id: 1, name: 'Spiced Melt', price: 9.99, image: '/assets/images/spiced-melt.jpg' },
-    { id: 2, name: 'Sweet Strawberry', price: 9.99, image: '/assets/images/sweet-strawberry.jpg' },
-    // Add more products
-];
+const App = () => {
+  return (
+    <Provider store={store}>
+      <Router>
+        <div className="flex flex-col min-h-screen">
+          {/* Main Content */}
+          <main className="flex-grow">
+            <Routes>
+              {/* Default Page (Home) */}
+              <Route path="/" element={<Home />} />
+              {/* Authentication Pages */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              {/* Product Pages */}
+              <Route path="/product/:productId" element={<ProductDetails />} />
 
-function App() {
-    return (
-        <div className="App">
-            <Header/>
-            <HeroBanner/>
-            <section className="p-8">
-                <h2 className="text-2xl font-bold mb-4">Products</h2>
-                <ProductList products={mockProducts}/>
-            </section>
-            <Footer/>
+              {/* <Route path="/product/:id" element={<ProductDetails />} /> */}
+              {/* Cart and Checkout */}
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+            </Routes>
+          </main>
         </div>
-    );
-}
+      </Router>
+    </Provider>
+  );
+};
 
 export default App;
+
