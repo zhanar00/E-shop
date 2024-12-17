@@ -10,6 +10,17 @@ import Profile from "../pages/Profile";
 import ProtectedRoute from "./ProtectedRoute";
 import NotFound from "../pages/NotFound"; // 404 page
 
+
+console.log("Home:", Home);
+console.log("Login:", Login);
+console.log("Signup:", Signup);
+console.log("ProductDetails:", ProductDetails);
+console.log("Cart:", Cart);
+console.log("Checkout:", Checkout);
+console.log("Profile:", Profile);
+console.log("ProtectedRoute:", ProtectedRoute);
+console.log("NotFound:", NotFound);
+
 const AppRoutes = () => {
     return (
         <Routes>
