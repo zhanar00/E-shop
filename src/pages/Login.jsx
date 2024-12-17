@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {mockUsers} from "../data/mockUsers";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
@@ -24,7 +24,7 @@ const LoginPage = () => {
             dispatch(login(user)); // Dispatch Redux login action
             navigate("/profile");
         } else {
-            setError("Invalid credentials");
+            setError("username or password is incorrect");
         }
     };
 
@@ -41,7 +41,7 @@ const LoginPage = () => {
                     {/* Contact */}
                     <div className="mb-4">
                         <label htmlFor="contact" className="block text-gray-700 font-medium mb-1">
-                            Contact
+                            Login
                         </label>
                         <input
                             type="text"
@@ -50,6 +50,7 @@ const LoginPage = () => {
                             value={contact}
                             onChange={(e) => setContact(e.target.value)}
                             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                            required
                         />
                     </div>
 
@@ -65,6 +66,7 @@ const LoginPage = () => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                            required
                         />
                     </div>
 
@@ -84,15 +86,17 @@ const LoginPage = () => {
                     <div className="flex justify-between items-center">
                         {/* Register Link */}
                         <span className="text-sm text-gray-600">
-                        You don’t have an account yet? <a href="/signup" className="text-green-500 hover:underline">Register</a>
+                        You don’t have an account yet? <a href="/signup"
+                                                          className="text-green-500 hover:underline">Register</a>
                         </span>
-                        {error && <p>{error}</p>}
                         {/* Submit Button */}
                         <button type="submit"
                                 className=" bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-11 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
                             Sign in
                         </button>
                     </div>
+                    {error && <p className="text-red-700">{error}</p>}
+                    
                 </form>
             </div>
         </div>

@@ -8,12 +8,21 @@ import pencil from '../assets/icons/pencil.png'
 import orders from '../assets/icons/orders.png'
 import heart from '../assets/icons/heart-icon.png'
 import Footer from "../components/layout/Footer";
-import { useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {useNavigate} from "react-router-dom";
+import {logout} from "../redux/authSlice";
 
 const Profile = () => {
     const [activeTab, setActiveTab] = useState("edit");
     const user = useSelector((state) => state.auth.user); // Access auth state
     const cartItems = useSelector((state) => state.cart.items); // Access cart state
+    const dispatch = useDispatch();
+    const navigate = useNavigate(); // To redirect after logout
+
+    const handleLogout = () => {
+        navigate("/"); // Redirect to login page
+        dispatch(logout()); // Clear user data from Redux store
+    };
 
     return (
         <div className="min-h-screen flex flex-col">
@@ -62,6 +71,15 @@ const Profile = () => {
                             >
                                 <img src={heart} className="w-4" alt=""/>
                                 Favorites
+                            </button>
+                        </li>
+                        <li>
+                            <button
+                                onClick={handleLogout}
+                                className={`w-full flex  p-2 px-7 items-center gap-2
+                                 rounded-[30px] border border-[#818181]/20`}>
+                                <img src={pencil} className="w-4" alt=""/>
+                                Logout
                             </button>
                         </li>
                     </ul>

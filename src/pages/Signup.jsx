@@ -1,6 +1,12 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {signup} from "../redux/authSlice";
 
 const Signup = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         contact: "",
         firstName: "",
@@ -14,13 +20,22 @@ const Signup = () => {
     });
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        const {name, value} = e.target;
+        setFormData({...formData, [name]: value});
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
+        dispatch(signup({
+            email: formData.contact,
+            password: formData.password,
+            name: formData.firstName,
+            surname: formData.secondName,
+            gender: formData.gender,
+            birthday: formData.year + "-" + formData.month + "-" + formData.day
+        }));
+        navigate("/profile")
     };
 
     return (
