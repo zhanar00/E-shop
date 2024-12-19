@@ -18,6 +18,9 @@ const Cart = () => {
   const handleClearCart = () => {
     dispatch(clearCart());
   };
+  const handleCheckout = () => {
+    navigate("/checkout"); // Navigate to the checkout page
+  };
 
   const totalAmount = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -115,8 +118,9 @@ const Cart = () => {
 
             {/* Кнопка "Check-out" */}
             <div className="text-center mt-8">
-              <button className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">
-                Check-out
+              <button onClick={handleCheckout}
+                      className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">
+                Checkout
               </button>
             </div>
           </>
