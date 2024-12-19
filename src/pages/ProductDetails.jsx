@@ -7,6 +7,7 @@ import Footer from "../components/layout/Footer";
 import { addToCart } from "../redux/cartSlice";
 import { useDispatch } from "react-redux";
 import Button from "../components/common/Button";
+import { HeartIcon } from "@heroicons/react/24/outline";
 
 const ProductDetail = () => {
   const { productId } = useParams();
@@ -98,11 +99,10 @@ const ProductDetail = () => {
   return (
     <>
       <Header />
-      <div className="flex justify-center mt-5">
+      <div className="flex justify-center mt-24 mb-0">
         <Button />
       </div>
-
-      <div className="product-detail-container mx-auto p-8 flex justify-center items-center min-h-screen max-w-screen-lg">
+      <div className="product-detail-container mx-auto p-8 flex justify-center items-center min-h-screen max-w-screen-lg py-0">
         <div className="product-detail-content flex flex-col lg:flex-row w-full">
           <div className="product-image-container flex-1 p-4">
             <img
@@ -111,6 +111,7 @@ const ProductDetail = () => {
               className="w-full h-auto rounded-md"
             />
           </div>
+          <HeartIcon className="w-6 h-6 m-2" />
           <div className="product-info flex-1 p-4">
             <h1 className="text-3xl font-bold">{product.name}</h1>
             <p className="mt-4 text-xl text-gray-700">{product.description}</p>

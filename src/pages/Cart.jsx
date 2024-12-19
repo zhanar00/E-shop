@@ -20,14 +20,19 @@ const Cart = () => {
   };
 
   const totalAmount = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total, item) => total + (Number(item.price) || 0) * item.quantity,
     0
   );
+
+  const getColorName = (colorCode, colors) => {
+    const color = colors.find((color) => color.code === colorCode);
+    return color ? color.name : colorCode; // Если цвет найден, выводим его название, иначе код
+  };
 
   return (
     <>
       <Header />
-      <div className="cart-page container mx-auto p-8">
+      <div className="cart-page container mx-auto p-8 mt-20">
         {/* Заголовок страницы */}
         <h1 className="text-2xl font-semibold text-center mb-6">
           Your cart items
@@ -65,7 +70,7 @@ const Cart = () => {
                     <h2 className="text-lg font-medium">{item.name}</h2>
                     {item.selectedColor && (
                       <p className="text-sm text-gray-500">
-                        Color: {item.selectedColor}
+                        Color: {getColorName(item.selectedColor, item.colors)} {/* Выводим название цвета */}
                       </p>
                     )}
                     {item.selectedSize && (
@@ -77,14 +82,14 @@ const Cart = () => {
                 </div>
 
                 {/* Price */}
-                <p>${item.price.toFixed(2)}</p>
+                <p>${(Number(item.price) || 0).toFixed(2)}</p>
 
                 {/* Quantity */}
                 <p>{item.quantity}</p>
 
                 {/* Total */}
                 <div className="flex items-center justify-between">
-                  <p>${(item.price * item.quantity).toFixed(2)}</p>
+                  <p>${((Number(item.price) || 0) * item.quantity).toFixed(2)}</p>
                   <button
                     onClick={() => handleRemove(item.id)}
                     className="text-red-500 hover:text-red-700 ml-4"
@@ -99,7 +104,7 @@ const Cart = () => {
             <div className="flex justify-between items-center mt-8">
               <div>
                 <p className="text-xl font-semibold">
-                  Sub-total: ${totalAmount.toFixed(2)}
+                  Sub-total: ${(Number(totalAmount) || 0).toFixed(2)}
                 </p>
                 <p className="text-sm text-gray-500">
                   Tax and shipping cost will be calculated later

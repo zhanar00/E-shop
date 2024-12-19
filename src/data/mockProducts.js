@@ -6,7 +6,7 @@ const mockProducts = [
     name: "Spiced Mint Candleleaf",
     price: "9.99",
     shippingInfo: "Free shipping",
-    image: "/assets/images/spiced-melt.jpg",
+    image: "/assets/spiced-melt.png",
     description:
       "Relaxed-fit shirt. Camp collar and short sleeves. Button-up front.",
     sizes: ["XS", "S", "M", "L", "XL", "2X"],

@@ -9,6 +9,7 @@ import Checkout from "../pages/Checkout";
 import Profile from "../pages/Profile";
 import ProtectedRoute from "./ProtectedRoute";
 import NotFound from "../pages/NotFound"; // 404 page
+import Wishlist from "../pages/Wishlist";
 
 
 console.log("Home:", Home);
@@ -32,7 +33,9 @@ const AppRoutes = () => {
             <Route path="/signup" element={<Signup />} />
             <Route path="/product/:productId" element={<ProductDetails />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/checkout" element={<Checkout />} />
+            {/* <Route path="/collections" element={<Collections />} /> */}
 
             {/* Protected Routes */}
             <Route element={<ProtectedRoute />}>

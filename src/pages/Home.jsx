@@ -12,7 +12,9 @@ const Home = () => {
             <Header />
             <HeroBanner />
             <section className="p-8">
-                <h2 className="text-2xl font-bold mb-4">Products</h2>
+                <h2 className="flex text-2xl font-bold mb-4 justify-center">new Collection</h2>
+                <h2 className="flex text-lg mb-4 justify-center ">Summer 2024</h2>
+
                 <ProductList products={mockProducts} />
             </section>
             <Footer />
