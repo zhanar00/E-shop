@@ -43,7 +43,16 @@ const Payment = ({ contactInfo, shippingAddress, shippingMethod, shippingCost = 
             return;
         }
         alert("Payment successful!");
-        nextStep();
+        nextStep({
+            contactInfo,
+            shippingAddress,
+            shippingMethod,
+            shippingCostParsed,
+            discount,
+            discountAmount,
+            subtotal,
+            total,
+        });
     };
 
     // Form validation
@@ -84,7 +93,7 @@ const Payment = ({ contactInfo, shippingAddress, shippingMethod, shippingCost = 
                     <div className="flex justify-between mb-2">
                         <span className="text-gray-500">Contact</span>
                         <span className="text-black">{contactInfo?.email || "N/A"}</span>
-                        <button onClick={prevStep} className="text-green-500 hover:underline">Edit</button>
+                        <button ></button>
                     </div>
                     <hr />
                     <div className="flex justify-between mt-2">
@@ -92,7 +101,7 @@ const Payment = ({ contactInfo, shippingAddress, shippingMethod, shippingCost = 
                         <span className="text-black">
                             {shippingAddress?.country || "N/A"}, {shippingAddress?.city || "N/A"}, {shippingAddress?.address || "N/A"}
                         </span>
-                        <button onClick={prevStep} className="text-green-500 hover:underline">Edit</button>
+                        <button ></button>
                     </div>
                     <hr />
                     <div className="flex justify-between mt-2">

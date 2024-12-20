@@ -9,51 +9,36 @@ const Checkout = () => {
     const [checkoutData, setCheckoutData] = useState({
         contactInfo: null,
         shippingAddress: null,
-        shippingMethod: "standard", // Default shipping method
-        shippingCost: 0, // Default shipping cost
-        subtotal: 0, // Subtotal of the cart
-        discount: 0, // Discount applied
-        totalAmount: 0, // Final total
+        shippingMethod: "standard",
+        shippingCost: 0,
+        subtotal: 0,
+        discount: 0,
+        discountAmount: 0,
+        totalAmount: 0,
     });
 
-    // Proceed to the next step
     const nextStep = () => setCurrentStep((prev) => prev + 1);
-
-    // Go back to the previous step
     const prevStep = () => setCurrentStep((prev) => prev - 1);
 
-    // Update checkout data from components
     const handleNextStep = (data) => {
         setCheckoutData((prevData) => ({
             ...prevData,
-            ...data, // Merge new data into the current checkout data
+            ...data,
         }));
         nextStep();
-    };
-
-    // Ensure totalAmount is calculated and passed to Confirmed
-    const calculateTotalAmount = () => {
-        const subtotal = checkoutData.subtotal || 0;
-        const shippingCost = parseFloat(checkoutData.shippingCost) || 0;
-        const discount = (subtotal * (checkoutData.discount || 0)) / 100;
-        const total = subtotal - discount + shippingCost;
-        return total.toFixed(2);
     };
 
     return (
         <div className="flex justify-center items-start h-screen bg-white">
             <div className="w-full bg-white rounded-lg shadow-md">
-                {/* Conditional Rendering for Steps */}
                 {currentStep === 1 && (
-                    <Authentication
-                        nextStep={(data) =>
-                            handleNextStep({
-                                contactInfo: data.contactInfo,
-                                shippingAddress: data.shippingAddress,
-                                subtotal: data.subtotal,
-                            })
-                        }
-                    />
+                    <Authentication nextStep={(data) =>
+                        handleNextStep({
+                            contactInfo: data.contactInfo,
+                            shippingAddress: data.shippingAddress,
+                            subtotal: data.subtotal,
+                        })
+                    } />
                 )}
                 {currentStep === 2 && (
                     <Shipping
@@ -73,10 +58,7 @@ const Checkout = () => {
                     <Payment
                         prevStep={prevStep}
                         nextStep={(data) =>
-                            handleNextStep({
-                                discount: data.discount,
-                                totalAmount: calculateTotalAmount(),
-                            })
+                            handleNextStep(data)
                         }
                         contactInfo={checkoutData.contactInfo}
                         shippingAddress={checkoutData.shippingAddress}
@@ -89,11 +71,10 @@ const Checkout = () => {
                     <Confirmed
                         contactInfo={checkoutData.contactInfo}
                         shippingAddress={checkoutData.shippingAddress}
-                        shippingMethod={checkoutData.shippingMethod}
-                        shippingCost={checkoutData.shippingCost}
-                        discount={checkoutData.discount}
-                        totalAmount={calculateTotalAmount()}
                         subtotal={checkoutData.subtotal}
+                        shippingCostParsed={checkoutData.shippingCost}
+                        discountAmount={checkoutData.discountAmount}
+                        total={checkoutData.total}
                     />
                 )}
             </div>
